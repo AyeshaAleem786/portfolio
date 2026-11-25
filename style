@@ -1,0 +1,361 @@
+/* ==========================================================
+   Design tokens
+   ========================================================== */
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --ink: #14202e;
+  --muted: #4d5c6b;
+  --line: #d5dce4;
+  --accent: #1f3a5f;
+  --on-accent: #ffffff;
+  --square-dark: #2c4a6e;
+  --square-light: #e4eaf1;
+  --highlight: #e3a72f;
+
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 3rem;
+  --space-5: 5rem;
+
+  --radius: 6px;
+  --container: 68rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1a26;
+    --surface: #162434;
+    --ink: #e8edf2;
+    --muted: #a3b1bf;
+    --line: #2a3b4e;
+    --accent: #8fb4e3;
+    --on-accent: #0f1a26;
+    --square-dark: #1f354d;
+    --square-light: #38567a;
+  }
+}
+
+/* ==========================================================
+   Base
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 var(--space-2);
+  max-width: 60ch;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+a:focus-visible,
+.button:focus-visible {
+  outline: 3px solid var(--highlight);
+  outline-offset: 3px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -4rem;
+  padding: var(--space-1) var(--space-2);
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius);
+  z-index: 20;
+}
+
+.skip-link:focus {
+  top: var(--space-1);
+}
+
+/* ==========================================================
+   Header
+   ========================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  padding-block: var(--space-2);
+}
+
+.brand {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+}
+
+.nav-list a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav-list a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   Hero
+   ========================================================== */
+.hero {
+  padding-block: var(--space-5);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.hero h1 {
+  font-size: clamp(2.75rem, 7vw, 4.75rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.lead {
+  font-size: 1.3rem;
+  color: var(--muted);
+  margin-bottom: var(--space-3);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.button-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--accent);
+}
+
+.button:hover {
+  background: var(--highlight);
+  border-color: var(--highlight);
+  color: #14202e;
+}
+
+/* Chessboard: 8x8 grid drawn from one repeating gradient */
+.board {
+  position: relative;
+  container-type: inline-size;
+  width: min(100%, 22rem);
+  aspect-ratio: 1;
+  justify-self: end;
+  border: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background:
+    repeating-conic-gradient(var(--square-dark) 0 25%, var(--square-light) 0 50%)
+    0 0 / 25% 25%;
+}
+
+.knight {
+  position: absolute;
+  left: 25%;
+  top: 37.5%;
+  display: grid;
+  place-items: center;
+  width: 12.5%;
+  height: 12.5%;
+  background: var(--highlight);
+  color: #14202e;
+  font-size: 9cqw;
+  line-height: 1;
+}
+
+/* ==========================================================
+   Sections
+   ========================================================== */
+.section {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: var(--space-3) var(--space-4);
+}
+
+.section h2 {
+  font-size: 1.75rem;
+}
+
+/* Skills */
+.skills {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.skills div {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.skills dt {
+  font-weight: 600;
+}
+
+.skills dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Projects */
+.projects {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.project {
+  padding-left: var(--space-3);
+  border-left: 4px solid var(--accent);
+}
+
+.project h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-1);
+}
+
+.project p {
+  color: var(--muted);
+  margin-bottom: var(--space-1);
+}
+
+/* Contact */
+.contact-list {
+  display: grid;
+  gap: var(--space-1);
+}
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+.site-footer {
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+@media (max-width: 52rem) {
+  .hero {
+    padding-block: var(--space-4);
+  }
+
+  .hero-inner,
+  .section-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .board {
+    justify-self: start;
+    width: min(100%, 16rem);
+  }
+
+  .skills div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .button {
+    transition: none;
+  }
+}
